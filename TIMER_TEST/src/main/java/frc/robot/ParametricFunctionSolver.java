@@ -66,7 +66,7 @@ public class ParametricFunctionSolver {
             URI desmosURI = new URI("https://dashguy999.github.io/DesmosTesting/");
 
             
-            String queryString = "value=3t^3+2t^2+t-1";
+            String queryString = "value= 3t^3 /+ 2t^2";
 
             //SmartDashboard.putString("desmosURI.getQuery before", desmosURI.getQuery());
 
