@@ -5,18 +5,19 @@
         
         <title>Simon's Amazing Path Generator</title>
         
-        <!--<script src="https://www.desmos.com/api/v0.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>-->
+        <script src="https://www.desmos.com/api/v0.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
     
     </head>
     
     <body>
         
-        <!--<div id="calculator" style="width: 900px; height: 500px;"></div>-->
+        <div id="calculator" style="width: 900px; height: 500px;"></div>
         
         <script>
         
+            //Testing query string: ?u=1&x=1&x=2&y=1&y=2&br&u=4&x=2&x=3&y=4&y=2&
             
-            //var myCalculator = Desmos.Calculator(document.getElementById('calculator'));
+            var myCalculator = Desmos.Calculator(document.getElementById('calculator'));
             const urlSearchParams = new URLSearchParams(window.location.search);
             var queryString = new String();
             queryString = urlSearchParams.toString();
@@ -33,6 +34,7 @@
             var yString = new String;
             var xPowerCounter = 0;
             var yPowerCounter = 0;
+            var graphIDCounter = 1;
 
             window.alert("BreakPoint 1.75");
             window.alert(chunk[0]);
@@ -52,18 +54,27 @@
                         //Modify Domain
                     }
                     else if(values[j].includes("x=")){
-                        xString = xString + values[j].substring(values[j].indexOf("=")) + "t^" + xPowerCounter;
+                        xString = xString + "(" + values[j].substring(values[j].indexOf("=")+1) + "t^" + xPowerCounter + ")+";
                         xPowerCounter++;
                     }
                     else if(values[j].includes("y=")){
-                        yString = yString + values[j].substring(values[j].indexOf("=")) + "t^" + yPowerCounter;
+                        yString = yString + "(" + values[j].substring(values[j].indexOf("=")+1) + "t^" + yPowerCounter + ")+";
                         yPowerCounter++;
                     }
 
                 }
 
+                xString = xString.substring(0, yString.length-1);
+                yString = yString.substring(0, yString.length-1);
                 latexString = "("+ xString + "," + yString + ")";
-                //myCalculator.setExpression({id: "graph1", latex: latexString});
+                window.alert(latexString);
+                
+                myCalculator.setExpression({id: graphIDCounter, latex: latexString});
+                
+                xString = "";
+                yString = "";
+                graphIDCounter++;
+                
                 
                 
             }
