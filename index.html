@@ -5,28 +5,75 @@
         
         <title>Simon's Amazing Path Generator</title>
         
-        <script src="https://www.desmos.com/api/v0.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+        <!--<script src="https://www.desmos.com/api/v0.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>-->
     
     </head>
     
     <body>
         
-        <div id="calculator" style="width: 900px; height: 500px;"></div>
+        <!--<div id="calculator" style="width: 900px; height: 500px;"></div>-->
         
         <script>
         
-            var myCalculator = Desmos.Calculator(document.getElementById('calculator'));
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-            });
-            // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-            let value = params.value; // "some_value"
+            
+            //var myCalculator = Desmos.Calculator(document.getElementById('calculator'));
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            var queryString = new String();
+            queryString = urlSearchParams.toString();
 
+
+            window.alert("Query String" + queryString);
+            //Splits the original query string into chunks
+            var chunk = queryString.split("&br");
+            
+            window.alert("BreakPoint 1.5");
+
+            var latexString = new String;
+            var xString = new String;
+            var yString = new String;
+            var xPowerCounter = 0;
+            var yPowerCounter = 0;
+
+            window.alert("BreakPoint 1.75");
+            window.alert(chunk[0]);
+
+            for(let i = 0; i < chunk.length; i++){
+                window.alert("BreakPoint 1.9");
+                //Splits the chunks into their coeffecient and time values
+                var values = chunk[i].split("&");
+
+                window.alert("BreakPoint 2");
+
+                for(let j = 0; j < values.length; j++){
+                    
+                    window.alert("BreakPoint 3");
+
+                    if(values[j].includes("u=")){
+                        //Modify Domain
+                    }
+                    else if(values[j].includes("x=")){
+                        xString = xString + values[j].substring(values[j].indexOf("=")) + "t^" + xPowerCounter;
+                        xPowerCounter++;
+                    }
+                    else if(values[j].includes("y=")){
+                        yString = yString + values[j].substring(values[j].indexOf("=")) + "t^" + yPowerCounter;
+                        yPowerCounter++;
+                    }
+
+                }
+
+                latexString = "("+ xString + "," + yString + ")";
+                //myCalculator.setExpression({id: "graph1", latex: latexString});
+                
+                
+            }
             
 
-            myCalculator.setExpression({id: "graph1", latex: value});
+            //myCalculator.setExpression({id: "graph1", latex: value});
             
         
+            window.alert("PROGRAM END");
+
         </script>
     </body>
 </html>
